@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://www.univ-grenoble-alpes.fr/l3miage/game"
+           targetNamespace="http://www.univ-grenoble-alpes.fr/l3miage/game"
+           elementFormDefault="qualified">
+
+  <xs:include schemaLocation="collision.xsd"/>
+
+  <xs:element name="floor" type="Floor"/>
+
+  <!-- Asset families-->
+
+  <!-- floor_corridor and floor_classroom -->
+  <xs:simpleType name="GroundAsset">
+    <xs:restriction base="AssetName">
+      <xs:pattern value="floor_.*"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!--lights and shadow  -->
+  <xs:simpleType name="EffectAsset">
+    <xs:restriction base="AssetName">
+      <xs:pattern value="fx_.*"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- wall pieces -->
+  <xs:simpleType name="WallAsset">
+    <xs:restriction base="AssetName">
+      <xs:pattern value="wall_.*"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- things hanging on a wall -->
+  <xs:simpleType name="WallObjectAsset">
+    <xs:restriction base="AssetName">
+      <xs:enumeration value="board"/>
+      <xs:enumeration value="camera"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- things standing on the floor -->
+  <xs:simpleType name="FurnitureAsset">
+    <xs:restriction base="AssetName">
+      <xs:enumeration value="desk"/>
+      <xs:enumeration value="teacher_desk"/>
+      <xs:enumeration value="bookshelf"/>
+      <xs:enumeration value="lockers"/>
+      <xs:enumeration value="vending_machine"/>
+      <xs:enumeration value="plant"/>
+      <xs:enumeration value="bin"/>
+      <xs:enumeration value="bench"/>
+      <xs:enumeration value="stairs"/>
+      <xs:enumeration value="exit"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- things the player picks up -->
+  <xs:simpleType name="ItemAsset">
+    <xs:restriction base="AssetName">
+      <xs:enumeration value="key"/>
+      <xs:enumeration value="coffee"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- people -->
+  <xs:simpleType name="CharacterAsset">
+    <xs:restriction base="AssetName">
+      <xs:enumeration value="player"/>
+      <xs:enumeration value="guard"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+
+  <!--  placed of the object  -->
+
+  <!-- x , y = top left corner of the image (or of the frame) in pixels -->
+  <xs:complexType name="Placement">
+    <xs:attribute name="asset" type="AssetName" use="required"/>
+    <xs:attribute name="x" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="y" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="direction" type="Direction"/>
+  </xs:complexType>
+
+  
+  <!-- each section restricts which assets are allowed -->
+  <xs:complexType name="EffectPlacement">
+    <xs:complexContent>
+      <xs:restriction base="Placement">
+        <xs:attribute name="asset" type="EffectAsset" use="required"/>
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="WallPlacement">
+    <xs:complexContent>
+      <xs:restriction base="Placement">
+        <xs:attribute name="asset" type="WallAsset" use="required"/>
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="WallObjectPlacement">
+    <xs:complexContent>
+      <xs:restriction base="Placement">
+        <xs:attribute name="asset" type="WallObjectAsset" use="required"/>
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="FurniturePlacement">
+    <xs:complexContent>
+      <xs:restriction base="Placement">
+        <xs:attribute name="asset" type="FurnitureAsset" use="required"/>
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ItemPlacement">
+    <xs:complexContent>
+      <xs:restriction base="Placement">
+        <xs:attribute name="asset" type="ItemAsset" use="required"/>
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="CharacterPlacement">
+    <xs:complexContent>
+      <xs:restriction base="Placement">
+        <xs:attribute name="asset" type="CharacterAsset" use="required"/>
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+
+  <!-- The guard walks in a straight line from (x , y) to (toX , toY) then back -->
+  <xs:complexType name="Character">
+    <xs:complexContent>
+      <xs:extension base="CharacterPlacement">
+        <xs:attribute name="toX" type="xs:nonNegativeInteger" />
+        <xs:attribute name="toY" type="xs:nonNegativeInteger" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+
+
+  <!--  A rectangle filled with the same tile  -->
+
+  <!-- The asset is repeated "columns" times to the right and "rows" times down , starting at x y -->
+  <xs:complexType name="Area">
+    <xs:attribute name="asset" type="AssetName" use="required"/>
+    <xs:attribute name="x" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="y" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="columns" type="xs:positiveInteger" use="required"/>
+    <xs:attribute name="rows" type="xs:positiveInteger" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="GroundArea">
+    <xs:complexContent>
+      <xs:restriction base="Area">
+        <xs:attribute name="asset" type="GroundAsset" use="required"/>
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+
+  <xs:complexType name="WallArea">
+    <xs:complexContent>
+      <xs:restriction base="Area">
+        <xs:attribute name="asset" type="WallAsset" use="required"/>
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+
+  <!-- the 8 big types that will present in the floor -->
+
+  <!--the floor tiles -->
+  <xs:complexType name="Ground">
+    <xs:sequence>
+      <xs:element name="area" type="GroundArea"  maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!--light and shadow-->
+  <xs:complexType name="Effects">
+    <xs:sequence>
+      <xs:element name="effect" type="EffectPlacement"  minOccurs="0" maxOccurs="unbounded"/> 
+    </xs:sequence>   
+  </xs:complexType>
+
+  <!-- the walls -->
+  <xs:complexType name="Walls">
+    <xs:choice  maxOccurs="unbounded">
+      <xs:element name="area" type="WallArea"/>
+      <xs:element name="wall" type="WallPlacement"/>
+    </xs:choice>
+  </xs:complexType>
+
+  <!-- things hanging on the walls -->
+  <xs:complexType name="WallObjects">
+    <xs:sequence>
+      <xs:element name="wallObject" type="WallObjectPlacement" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!--one room -->
+  <xs:complexType name="Room">
+    <xs:sequence>
+      <xs:element name="furniture" type="FurniturePlacement" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <!-- list of rooms-->
+  <xs:complexType name="Rooms">
+    <xs:sequence>
+      <xs:element name="room" type="Room"  maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!--the corridor furniture-->
+  <xs:complexType name="Corridor">
+    <xs:sequence>
+      <xs:element name="furniture" type="FurniturePlacement" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- things to pick up -->
+  <xs:complexType name="Items">
+    <xs:sequence>
+      <xs:element name="item" type="ItemPlacement" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- the player and the guards -->
+  <xs:complexType name="Characters">
+    <xs:sequence>
+      <xs:element name="character" type="Character"  maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+
+  <!--the root element -->
+  <xs:complexType name="Floor">
+    <xs:sequence>
+      <xs:element name="ground" type="Ground"/>
+      <xs:element name="effects" type="Effects"/>
+      <xs:element name="walls" type="Walls"/>
+      <xs:element name="wallObjects" type="WallObjects"/>
+      <xs:element name="rooms" type="Rooms"/>
+      <xs:element name="corridor" type="Corridor"/>
+      <xs:element name="items" type="Items"/>
+      <xs:element name="characters" type="Characters"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  
+
+</xs:schema>

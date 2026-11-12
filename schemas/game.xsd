@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://www.univ-grenoble-alpes.fr/l3miage/game"
+           targetNamespace="http://www.univ-grenoble-alpes.fr/l3miage/game"
+           elementFormDefault="qualified">
+
+
+  <xs:element name="game" type="Game"/>
+
+
+  <!-- an angle of view in degrees -->
+  <xs:simpleType name="ViewAngle">
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="0"/>
+      <xs:maxInclusive value="180"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- one floor file -->
+  <xs:complexType name="FloorFile">
+    <xs:attribute name="file" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <!-- the floors -->
+  <xs:complexType name="Floors">
+    <xs:sequence>
+      <xs:element name="floor" type="FloorFile" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- the student -->
+  <xs:complexType name="PlayerSettings">
+    <xs:attribute name="speed" type="xs:positiveInteger" use="required"/>          <!-- pixels per second -->
+    <xs:attribute name="coffeeBoost" type="xs:positiveInteger" use="required"/>    <!-- percent of the normal speed (150 = 1.5 times faster) -->
+    <xs:attribute name="coffeeTime" type="xs:positiveInteger" use="required"/>     <!-- seconds -->
+  </xs:complexType>
+
+  <!-- the guards -->
+  <xs:complexType name="GuardSettings">
+    <xs:attribute name="speed" type="xs:positiveInteger" use="required"/>          <!-- pixels per second -->
+    <xs:attribute name="visionRange" type="xs:positiveInteger" use="required"/>    <!-- pixels -->
+    <xs:attribute name="visionAngle" type="ViewAngle" use="required"/>             <!-- degrees -->
+    <xs:attribute name="suspicionTime" type="xs:positiveInteger" use="required"/>  <!-- milliseconds seen before "!"-->
+    <xs:attribute name="touchDistance" type="xs:positiveInteger" use="required"/>  <!-- pixels : closer = caught -->
+  </xs:complexType>
+
+  <!-- the security cameras : they catch the student on their own -->
+  <xs:complexType name="CameraSettings">
+    <xs:attribute name="visionRange" type="xs:positiveInteger" use="required"/>
+    <xs:attribute name="visionAngle" type="ViewAngle" use="required"/>
+    <xs:attribute name="suspicionTime" type="xs:positiveInteger" use="required"/> 
+  </xs:complexType>
+
+  <!-- the root element -->
+  <xs:complexType name="Game">
+    <xs:sequence>
+      <xs:element name="floors" type="Floors"/>
+      <xs:element name="player" type="PlayerSettings"/>
+      <xs:element name="guard" type="GuardSettings"/>
+      <xs:element name="camera" type="CameraSettings"/>
+    </xs:sequence>
+  </xs:complexType>
+
+ 
+
+</xs:schema>

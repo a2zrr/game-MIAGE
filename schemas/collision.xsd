@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://www.univ-grenoble-alpes.fr/l3miage/game"
+           targetNamespace="http://www.univ-grenoble-alpes.fr/l3miage/game"
+           elementFormDefault="qualified">
+
+
+  <!-- Only these four words are allowed -->
+  <xs:simpleType name="Direction">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="down"/>
+      <xs:enumeration value="left"/>
+      <xs:enumeration value="right"/>
+      <xs:enumeration value="up"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- List of directions  -->
+  <xs:simpleType name="DirectionList">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(down|left|right|up)(,(down|left|right|up))*"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- The 32 asset names -->
+  <xs:simpleType name="AssetName">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="bench"/>
+      <xs:enumeration value="bin"/>
+      <xs:enumeration value="board"/>
+      <xs:enumeration value="bookshelf"/>
+      <xs:enumeration value="camera"/>
+      <xs:enumeration value="coffee"/>
+      <xs:enumeration value="desk"/>
+      <xs:enumeration value="exit"/>
+      <xs:enumeration value="floor_classroom"/>
+      <xs:enumeration value="floor_corridor"/>
+      <xs:enumeration value="fx_camera_cone"/>
+      <xs:enumeration value="fx_flashlight_cone"/>
+      <xs:enumeration value="fx_lamp_pool"/>
+      <xs:enumeration value="fx_moonlight"/>
+      <xs:enumeration value="fx_shadow_east"/>
+      <xs:enumeration value="fx_shadow_south"/>
+      <xs:enumeration value="guard"/>
+      <xs:enumeration value="key"/>
+      <xs:enumeration value="lockers"/>
+      <xs:enumeration value="plant"/>
+      <xs:enumeration value="player"/>
+      <xs:enumeration value="stairs"/>
+      <xs:enumeration value="teacher_desk"/>
+      <xs:enumeration value="vending_machine"/>
+      <xs:enumeration value="wall_corner_inner_left"/>
+      <xs:enumeration value="wall_corner_inner_right"/>
+      <xs:enumeration value="wall_corner_outer_left"/>
+      <xs:enumeration value="wall_corner_outer_right"/>
+      <xs:enumeration value="wall_doorway"/>
+      <xs:enumeration value="wall_front"/>
+      <xs:enumeration value="wall_top"/>
+      <xs:enumeration value="wall_window"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+
+
+  <!-- The collision box in pixel-->
+  <xs:complexType name="Footprint">
+    <xs:attribute name="x" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="y" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="w" type="xs:positiveInteger" use="required"/>
+    <xs:attribute name="h" type="xs:positiveInteger" use="required"/>
+  </xs:complexType>
+
+  <!-- One <asset> element -->
+  <xs:complexType name="Asset">
+    <xs:sequence>
+      <xs:element name="footprint" type="Footprint" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="AssetName" use="required"/>
+    <xs:attribute name="file" type="xs:string" use="required"/>
+    <xs:attribute name="width" type="xs:positiveInteger" use="required"/>
+    <xs:attribute name="height" type="xs:positiveInteger" use="required"/>
+    <xs:attribute name="frames" type="DirectionList" />
+    <xs:attribute name="solid" type="xs:boolean" />
+  </xs:complexType>
+
+
+  <!--root element-->
+  <xs:element name="assets">
+    <xs:complexType>
+      <xs:sequence>
+        <!-- At least one asset-->
+        <xs:element name="asset" type="Asset" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
