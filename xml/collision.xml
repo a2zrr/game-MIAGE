@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<assets xmlns="http://www.univ-grenoble-alpes.fr/l3miage/game"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.univ-grenoble-alpes.fr/l3miage/game ../xsd/collision.xsd">
+
+    <!-- characters: one frame per direction (down, left, right, up) -->
+    <asset name="player" file="player.png" width="160" height="56" frames="down,left,right,up">
+        <footprint x="11" y="49" w="18" h="7"/>
+    </asset>
+    <asset name="guard" file="guard.png" width="160" height="60" frames="down,left,right,up">
+        <footprint x="10" y="52" w="20" h="8"/>
+    </asset>
+
+    <!-- gameplay objects -->
+    <asset name="camera" file="camera.png" width="128" height="32" frames="down,left,right,up"/>
+    <asset name="key" file="key.png" width="24" height="24">
+        <footprint x="6" y="18" w="13" h="5"/>
+    </asset>
+    <asset name="coffee" file="coffee.png" width="24" height="28">
+        <footprint x="7" y="23" w="11" h="5"/>
+    </asset>
+    <asset name="stairs" file="stairs.png" width="120" height="120">
+        <footprint x="4" y="8" w="112" h="106"/>
+    </asset>
+    <asset name="exit" file="exit.png" width="120" height="100">
+        <footprint x="8" y="90" w="104" h="10"/>
+    </asset>
+
+    <!-- building tiles -->
+    <asset name="floor_corridor" file="floor_corridor.png" width="40" height="40"/>
+    <asset name="floor_classroom" file="floor_classroom.png" width="40" height="40"/>
+    <asset name="wall_top" file="wall_top.png" width="40" height="40" solid="true"/>
+    <asset name="wall_front" file="wall_front.png" width="40" height="60" solid="true"/>
+    <asset name="wall_corner_inner_left" file="wall_corner_inner_left.png" width="40" height="60" solid="true"/>
+    <asset name="wall_corner_inner_right" file="wall_corner_inner_right.png" width="40" height="60" solid="true"/>
+    <asset name="wall_corner_outer_left" file="wall_corner_outer_left.png" width="40" height="60" solid="true"/>
+    <asset name="wall_corner_outer_right" file="wall_corner_outer_right.png" width="40" height="60" solid="true"/>
+    <asset name="wall_window" file="wall_window.png" width="40" height="60" solid="true"/>
+    <asset name="wall_doorway" file="wall_doorway.png" width="40" height="60" solid="false"/>
+
+    <!-- furniture: solid="true" = the footprint blocks the student -->
+    <asset name="desk" file="desk.png" width="80" height="60" solid="true">
+        <footprint x="4" y="30" w="72" h="28"/>
+    </asset>
+    <asset name="teacher_desk" file="teacher_desk.png" width="120" height="60" solid="true">
+        <footprint x="4" y="30" w="110" h="26"/>
+    </asset>
+    <asset name="board" file="board.png" width="160" height="40"/>
+    <asset name="bookshelf" file="bookshelf.png" width="80" height="60" solid="true">
+        <footprint x="3" y="48" w="72" h="10"/>
+    </asset>
+    <asset name="lockers" file="lockers.png" width="40" height="70" solid="true">
+        <footprint x="0" y="60" w="40" h="10"/>
+    </asset>
+    <asset name="vending_machine" file="vending_machine.png" width="48" height="72" solid="true">
+        <footprint x="0" y="60" w="44" h="12"/>
+    </asset>
+    <asset name="plant" file="plant.png" width="32" height="48" solid="true">
+        <footprint x="9" y="41" w="14" h="7"/>
+    </asset>
+    <asset name="bin" file="bin.png" width="24" height="28" solid="true">
+        <footprint x="6" y="22" w="12" h="6"/>
+    </asset>
+    <asset name="bench" file="bench.png" width="80" height="40" solid="true">
+        <footprint x="4" y="26" w="72" h="12"/>
+    </asset>
+
+    <!-- light and shadow overlays -->
+    <asset name="fx_lamp_pool" file="fx_lamp_pool.png" width="220" height="140"/>
+    <asset name="fx_moonlight" file="fx_moonlight.png" width="120" height="150"/>
+    <asset name="fx_flashlight_cone" file="fx_flashlight_cone.png" width="240" height="140"/>
+    <asset name="fx_camera_cone" file="fx_camera_cone.png" width="220" height="140"/>
+    <asset name="fx_shadow_south" file="fx_shadow_south.png" width="40" height="24"/>
+    <asset name="fx_shadow_east" file="fx_shadow_east.png" width="24" height="40"/>
+
+</assets>
