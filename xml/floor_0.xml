@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<floor
+        xmlns="http://www.univ-grenoble-alpes.fr/l3miage/game"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.univ-grenoble-alpes.fr/l3miage/game ../xsd/floor.xsd"
+>
+
+    <!-- the floor tiles: corridor tiles everywhere (also in the entrance hall), wood in the two classrooms -->
+    <ground>
+        <area asset="floor_corridor" x="0" y="0" columns="32" rows="18"/>
+        <area asset="floor_classroom" x="40" y="0" columns="9" rows="11"/>
+        <area asset="floor_classroom" x="840" y="0" columns="10" rows="11"/>
+    </ground>
+
+
+    <!-- light and shadow on the floor (drawn before the walls) -->
+    <effects>
+
+        <!-- shadows under the walls of the classrooms, the entrance hall and the corridor -->
+        <effect asset="fx_shadow_south" x="40" y="100"/>
+        <effect asset="fx_shadow_south" x="440" y="100" />
+        <effect asset="fx_shadow_south" x="840" y="100" />
+        <effect asset="fx_shadow_south" x="40" y="460" />
+        <effect asset="fx_shadow_south" x="800" y="460" />
+
+        <!-- shadows on the right of the side walls -->
+        <effect asset="fx_shadow_east" x="40" y="100" />
+        <effect asset="fx_shadow_east" x="440" y="100" />
+        <effect asset="fx_shadow_east" x="840" y="100" />
+        <effect asset="fx_shadow_east" x="40" y="460" />
+
+        <!-- moonlight coming through the six windows -->
+        <effect asset="fx_moonlight" x="76" y="100"/>
+        <effect asset="fx_moonlight" x="316" y="100"/>
+        <effect asset="fx_moonlight" x="476" y="100"/>
+        <effect asset="fx_moonlight" x="716" y="100"/>
+        <effect asset="fx_moonlight" x="876" y="100"/>
+        <effect asset="fx_moonlight" x="1156" y="100"/>
+
+        <!-- moonlight coming through the glass doors of the exit -->
+        <effect asset="fx_moonlight" x="566" y="100"/>
+        <effect asset="fx_moonlight" x="616" y="100"/>
+
+        <!-- warm light under the ceiling lamps (two in the corridor, one where the hall opens, one in the hall) -->
+        <effect asset="fx_lamp_pool" x="120" y="502"/>
+        <effect asset="fx_lamp_pool" x="510" y="510"/>
+        <effect asset="fx_lamp_pool" x="920" y="502"/>
+        <effect asset="fx_lamp_pool" x="510" y="190"/>
+
+        <!-- the flashlight and camera cones are not here: they move, so the game draws them -->
+
+    </effects>
+
+
+    <!-- the walls -->
+    <walls>
+
+        <!-- wall tops: north wall (with the exit in the middle), south wall -->
+        <area asset="wall_top" x="0" y="0" columns="14" rows="1"/>
+        <area asset="wall_top" x="680" y="0" columns="15" rows="1"/>
+        <area asset="wall_top" x="0" y="680" columns="32" rows="1"/>
+
+        <!-- wall tops: between the classrooms and the corridor (gap above each door);
+             the entrance hall has no wall, it opens wide onto the corridor -->
+        <area asset="wall_top" x="0" y="360" columns="5" rows="1"/>
+        <area asset="wall_top" x="240" y="360" columns="5" rows="1"/>
+        <area asset="wall_top" x="800" y="360" columns="5" rows="1"/>
+        <area asset="wall_top" x="1040" y="360" columns="6" rows="1"/>
+
+        <!-- wall tops: the side walls -->
+        <area asset="wall_top" x="0" y="40" columns="1" rows="8"/>
+        <area asset="wall_top" x="400" y="40" columns="1" rows="8"/>
+        <area asset="wall_top" x="800" y="40" columns="1" rows="8"/>
+        <area asset="wall_top" x="1240" y="40" columns="1" rows="8"/>
+        <area asset="wall_top" x="0" y="400" columns="1" rows="7"/>
+        <area asset="wall_top" x="1240" y="400" columns="1" rows="7"/>
+
+        <!-- classroom A: back wall -->
+        <wall asset="wall_corner_inner_left" x="40" y="40"/>
+        <wall asset="wall_window" x="80" y="40"/>
+        <area asset="wall_front" x="120" y="40" columns="5" rows="1"/>
+        <wall asset="wall_window" x="320" y="40"/>
+        <wall asset="wall_corner_inner_right" x="360" y="40"/>
+
+        <!-- entrance hall: back wall, on both sides of the exit -->
+        <wall asset="wall_corner_inner_left" x="440" y="40"/>
+        <wall asset="wall_window" x="480" y="40"/>
+        <wall asset="wall_front" x="520" y="40"/>
+        <wall asset="wall_front" x="680" y="40"/>
+        <wall asset="wall_window" x="720" y="40"/>
+        <wall asset="wall_corner_inner_right" x="760" y="40"/>
+
+        <!-- classroom B: back wall -->
+        <wall asset="wall_corner_inner_left" x="840" y="40"/>
+        <wall asset="wall_window" x="880" y="40"/>
+        <area asset="wall_front" x="920" y="40" columns="6" rows="1"/>
+        <wall asset="wall_window" x="1160" y="40"/>
+        <wall asset="wall_corner_inner_right" x="1200" y="40"/>
+
+        <!-- corridor: wall of classroom A, with its door -->
+        <wall asset="wall_corner_inner_left" x="40" y="400"/>
+        <area asset="wall_front" x="80" y="400" columns="2" rows="1"/>
+        <wall asset="wall_corner_outer_right" x="160" y="400"/>
+        <wall asset="wall_doorway" x="200" y="400"/>
+        <wall asset="wall_corner_outer_left" x="240" y="400"/>
+        <area asset="wall_front" x="280" y="400" columns="3" rows="1"/>
+        <wall asset="wall_corner_outer_right" x="400" y="400"/>
+
+        <!-- corridor: wall of classroom B, with its door -->
+        <wall asset="wall_corner_outer_left" x="800" y="400"/>
+        <area asset="wall_front" x="840" y="400" columns="3" rows="1"/>
+        <wall asset="wall_corner_outer_right" x="960" y="400"/>
+        <wall asset="wall_doorway" x="1000" y="400"/>
+        <wall asset="wall_corner_outer_left" x="1040" y="400"/>
+        <area asset="wall_front" x="1080" y="400" columns="3" rows="1"/>
+        <wall asset="wall_corner_inner_right" x="1200" y="400"/>
+
+    </walls>
+
+
+    <!-- things hanging on the walls -->
+    <wallObjects>
+
+        <!-- one whiteboard in each classroom -->
+        <wallObject asset="board" x="140" y="50"/>
+        <wallObject asset="board" x="960" y="50"/>
+
+        <!-- the security camera left of the exit, watching the hall: it looks down and turns 45Â° to each side (the game does the turning) -->
+        <wallObject asset="camera" x="522" y="50" direction="down"/>
+
+    </wallObjects>
+
+
+    <!-- list of our rooms -->
+    <rooms>
+
+        <!-- Classroom A: four desks; the key is hidden here -->
+        <room name="Classroom A">
+            <furniture asset="teacher_desk" x="160" y="108"/>
+            <furniture asset="desk" x="80" y="196"/>
+            <furniture asset="desk" x="80" y="280"/>
+            <furniture asset="desk" x="240" y="196"/>
+            <furniture asset="desk" x="240" y="280"/>
+        </room>
+
+        <!-- Entrance hall: the exit doors, two plants, the reception desk and a bench -->
+        <room name="Entrance hall">
+            <furniture asset="exit" x="560" y="0"/>
+            <furniture asset="plant" x="448" y="104"/>
+            <furniture asset="plant" x="764" y="104"/>
+            <furniture asset="teacher_desk" x="470" y="250"/>
+            <furniture asset="bench" x="704" y="290"/>
+        </room>
+
+        <!-- Classroom B: six desks -->
+        <room name="Classroom B">
+            <furniture asset="teacher_desk" x="980" y="108"/>
+            <furniture asset="desk" x="866" y="196"/>
+            <furniture asset="desk" x="866" y="280"/>
+            <furniture asset="desk" x="1000" y="196"/>
+            <furniture asset="desk" x="1000" y="280"/>
+            <furniture asset="desk" x="1134" y="196"/>
+            <furniture asset="desk" x="1134" y="280"/>
+        </room>
+
+    </rooms>
+
+
+    <!-- the corridor -->
+    <corridor>
+
+        <!-- lockers along the wall of classroom A -->
+        <furniture asset="lockers" x="40" y="400"/>
+        <furniture asset="lockers" x="80" y="400"/>
+        <furniture asset="lockers" x="120" y="400"/>
+        <furniture asset="lockers" x="280" y="400"/>
+        <furniture asset="lockers" x="320" y="400"/>
+        <furniture asset="lockers" x="360" y="400"/>
+
+        <!-- lockers and the break corner along the wall of classroom B -->
+        <furniture asset="lockers" x="840" y="400"/>
+        <furniture asset="lockers" x="880" y="400"/>
+        <furniture asset="lockers" x="920" y="400"/>
+        <furniture asset="vending_machine" x="1086" y="400"/>
+        <furniture asset="bin" x="1140" y="444"/>
+
+        <!-- the stairs: the student arrives here from the floor above -->
+        <furniture asset="stairs" x="1100" y="532"/>
+
+    </corridor>
+
+
+    <!-- things to pick up -->
+    <items>
+        <!-- the key of the exit, next to the teacher desk of classroom A -->
+        <item asset="key" x="300" y="150"/>
+        <!-- a coffee, in classroom B -->
+        <item asset="coffee" x="1094" y="262"/>
+    </items>
+
+
+    <!-- list of the characters -->
+    <characters>
+
+        <!-- the student arrives from the stairs, at the end of the corridor -->
+        <character asset="player" x="1170" y="476" direction="left"/>
+
+        <!-- guard 1: walks from the exit doors down the hall to the corridor, and back -->
+        <character asset="guard" x="600" y="128" direction="down" toX="600" toY="400"/>
+
+        <!-- guard 2: walks along the corridor -->
+        <character asset="guard" x="860" y="560" direction="left" toX="120" toY="560"/>
+
+        <!-- guard 3: walks between the desks of classroom A, below the key -->
+        <character asset="guard" x="120" y="210" direction="right" toX="330" toY="210"/>
+
+    </characters>
+
+</floor>

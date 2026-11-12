@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<game
+        xmlns="http://www.univ-grenoble-alpes.fr/l3miage/game"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.univ-grenoble-alpes.fr/l3miage/game ../xsd/game.xsd"
+>
+
+    <!-- the floors-->
+    <floors>
+        <floor file="floor_1.xml"/>
+        <floor file="floor_0.xml"/>
+    </floors>
+
+
+    <!-- coffee gives 150 % of the normal speed (1.5 times faster) for 5 seconds. -->
+    <player speed="110" coffeeBoost="150" coffeeTime="5"/>
+
+
+    <!-- the guards : what they see is exactly their flashlight cone 
+         600 milliseconds in the cone = caught -->
+    <guard speed="70" visionRange="220" visionAngle="32" suspicionTime="600" touchDistance="26"/>
+
+
+    <!-- the security cameras : 1000 milliseconds in the cone = caught -->
+    <camera visionRange="210" visionAngle="30" suspicionTime="1000"/>
+
+
+</game>
